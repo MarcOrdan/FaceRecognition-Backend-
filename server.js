@@ -1,11 +1,12 @@
 const express = require('express');
-
+const bcrypt = require('bcrypt-nodejs');
+const cors = require('cors');
 
 const app = express();
 
 //middlewares
 app.use(express.json());
-
+app.use(cors());
 
 //database
 const database = {
@@ -13,20 +14,27 @@ const database = {
     {
         id: '123',
         name: 'Marc',
+        password:'mac',
         email: 'marc@gmail.com',
-        password: 'cookies',
         entries: 0,
         joined: new Date()
     },
     {
         id: '124',
         name: 'linds',
+        password: 'linds',
         email: 'linds@gmail.com',
-        password: 'password',
         entries: 0,
         joined: new Date()
     }
-]
+  ],
+  login: [
+      {
+          id:'123',
+          hash: '',
+          email: 'marc@gmail.com'
+      }
+  ]
 }
 
 //root endpoint
@@ -94,7 +102,7 @@ app.put('/image',(req, res) => {
 
 
 //server
-app.listen(3000, () => {
-    console.log('Server Running on port 3000');
+app.listen(3001, () => {
+    console.log('Server Running on port 3001');
 })
 
